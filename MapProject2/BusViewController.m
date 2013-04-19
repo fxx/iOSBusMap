@@ -13,7 +13,8 @@
 
 @interface BusViewController ()
 {
-    NSMutableArray *filterObj;
+    NSMutableArray *busObj;
+    NSMutableArray *busFilterObj;
     BOOL bFilter;
 }
 
@@ -38,11 +39,12 @@
     self.busSearchBar.delegate = self;
     self.busTableView.delegate = self;
     self.busTableView.dataSource = self;
+    
     // [self.busSearchBar setShowsScopeBar:YES];
     sqlite3 *DB;
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"hn" ofType:@"sqlite"];
-    NSMutableArray * arrayObj = [[NSMutableArray alloc] init];
+    busObj = [[NSMutableArray alloc] init];
     
     sqlite3_stmt *statement;
     if (sqlite3_open_v2([path UTF8String], &DB, SQLITE_OPEN_READWRITE, NULL) == 0)
@@ -64,17 +66,15 @@
                                      :[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)]
                                      :[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)]
                                      :[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)]];
-                [arrayObj addObject:bus];
+                [busObj addObject:bus];
                 ID++;
             }
         }
     }
     sqlite3_finalize(statement);
     
-    //intialize table data
-    self.aBusMap = arrayObj;
-
 }
+
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     if (searchText.length == 0) {
@@ -83,12 +83,12 @@
     else
     {
         bFilter = YES;
-        filterObj = [[NSMutableArray alloc] init];
+        busFilterObj = [[NSMutableArray alloc] init];
         
         sqlite3 *DB;
         
         NSString *path = [[NSBundle mainBundle] pathForResource:@"hn" ofType:@"sqlite"];
-        filterObj = [[NSMutableArray alloc] init];
+        busFilterObj = [[NSMutableArray alloc] init];
         
         sqlite3_stmt *statement;
         if (sqlite3_open_v2([path UTF8String], &DB, SQLITE_OPEN_READWRITE, NULL) == 0)
@@ -115,7 +115,7 @@
                                          :[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)]
                                          :[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)]
                                          :[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)]];
-                    [filterObj addObject:bus];
+                    [busFilterObj addObject:bus];
                     ID++;
                 }
             }
@@ -154,28 +154,21 @@
 {
     // Return the number of rows in the section.
     if (bFilter) {
-        return [filterObj count];
+        return [busFilterObj count];
     }
     
-    return [self.aBusMap count];
+    return [busObj count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     static NSString *CellIdentifier = @"Cell";
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     CustomTableCell *cell = [self.busTableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cell == nil) {
-       // NSArray * nib = [[NSBundle mainBundle]loadNibNamed:@"Cell" owner:self options:nil];
-       // cell = [nib objectAtIndex:0];
-      cell = [[CustomTableCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
-    }
     
     if (bFilter)
     {
-        BusMapObject*bus = [filterObj objectAtIndex:indexPath.row];
+        BusMapObject*bus = [busFilterObj objectAtIndex:indexPath.row];
         cell.lBusNumber.text    = bus.sBusNumber;
         cell.lBusName.text      = bus.sName;
         cell.lBusCompany.text   = bus.sBusCompany;
@@ -183,7 +176,7 @@
     }
     else
     {
-        BusMapObject*bus = [self.aBusMap objectAtIndex:indexPath.row];
+        BusMapObject*bus = [busObj objectAtIndex:indexPath.row];
         cell.lBusNumber.text    = bus.sBusNumber;
         cell.lBusName.text      = bus.sName;
         cell.lBusCompany.text   = bus.sBusCompany;
@@ -206,21 +199,22 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"abc"]) {
-        UITableViewCell *cell = (UITableViewCell *)sender;
-        NSIndexPath *ip =  [self.busTableView indexPathForCell:cell];
+        BusDetailViewController * busdetail = (BusDetailViewController *)segue.destinationViewController;
+        NSIndexPath *indexPath = nil;
+        
         if (bFilter) {
-            BusMapObject *bO = [filterObj objectAtIndex:ip.row];
-            BusDetailViewController * busdetail = (BusDetailViewController *)segue.destinationViewController;
+            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            BusMapObject *bO = [busFilterObj objectAtIndex:indexPath.row];
             busdetail.busO = bO;
         }
         else
         {
-            BusMapObject *bO = [self.aBusMap objectAtIndex:ip.row];
-            BusDetailViewController * busdetail = (BusDetailViewController *)segue.destinationViewController;
+            indexPath = [self.busTableView indexPathForSelectedRow];
+            BusMapObject *bO = [busObj objectAtIndex:indexPath.row];
             busdetail.busO = bO;
         }
+        
     }
 }
-
 
 @end
