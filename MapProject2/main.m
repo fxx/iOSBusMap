@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 #import "BusAppDelegate.h"
+#import "CustomTableCell.h"
+
 
 int main(int argc, char *argv[])
 {
