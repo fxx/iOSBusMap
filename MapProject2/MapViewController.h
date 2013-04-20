@@ -31,4 +31,5 @@
 @property (retain, nonatomic) IBOutlet UISearchBar *searchBarItem;
 
 - (IBAction)dimmingViewTapped:(id)sender;
+
 @end

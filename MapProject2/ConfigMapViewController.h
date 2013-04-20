@@ -26,6 +26,9 @@
 
 - (void)configurationViewController:(ConfigMapViewController *)controller mapSourceChanged:(MapSource)mapSource;
 - (void)configurationViewController:(ConfigMapViewController *)controller mapTypeChanged:(MKMapType)mapType;
+
+@optional
+
 - (void)configurationViewControllerWillAddPin:(ConfigMapViewController *)controller;
 - (void)configurationViewControllerWillPrintMap:(ConfigMapViewController *)controller;
 - (void)configurationViewController:(ConfigMapViewController *)controller radiusChanged:(int)radius;
