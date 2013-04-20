@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G56" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="c4r-wO-dSC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="c4r-wO-dSC">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
@@ -35,7 +35,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yVC-gi-C7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1144" y="-62"/>
+            <point key="canvasLocation" x="936" y="-73"/>
         </scene>
         <!--Map Bus View Controller-->
         <scene sceneID="iQt-NS-TK3">
@@ -76,7 +76,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sS3-Ls-KUH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2178" y="-103"/>
+            <point key="canvasLocation" x="2054" y="-73"/>
         </scene>
         <!--Navigation Controller - Lộ trình-->
         <scene sceneID="07A-rx-Uxa">
@@ -96,7 +96,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EYX-9X-OYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="182" y="-73"/>
+            <point key="canvasLocation" x="-123" y="-73"/>
         </scene>
         <!--Bus View Controller - Lộ trình-->
         <scene sceneID="NLT-7e-Rsd">
@@ -328,20 +328,63 @@
                                     <action selector="mapTypeChanged:" destination="zK3-XV-tcX" eventType="valueChanged" id="0ze-W3-9ub"/>
                                 </connections>
                             </segmentedControl>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="250" minValue="0.0" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="LX3-sT-pOf">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="177" id="xCF-ty-CG8"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="radiusChange:" destination="zK3-XV-tcX" eventType="valueChanged" id="xVW-sT-Nro"/>
+                                    <action selector="radiusDidChange:" destination="zK3-XV-tcX" eventType="touchUpInside" id="hYn-M7-hcS"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="250" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9y-xE-fDa">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="33" id="bzw-Ix-qD2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="R = " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gG7-xv-wY6">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="34" id="Htx-3E-BuQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8O-Dm-Sb2">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="16" id="VWU-7S-pIX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="kY4-4y-KBr" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="3mB-10-Abq"/>
                             <constraint firstItem="xmw-jJ-az4" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="7Xv-5a-a5F"/>
-                            <constraint firstAttribute="trailing" secondItem="xmw-jJ-az4" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="EoD-7v-2pD"/>
-                            <constraint firstAttribute="bottom" secondItem="kY4-4y-KBr" secondAttribute="bottom" constant="22" id="PpR-et-CL3"/>
-                            <constraint firstAttribute="trailing" secondItem="kY4-4y-KBr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="TbC-wx-UEv"/>
-                            <constraint firstAttribute="bottom" secondItem="xmw-jJ-az4" secondAttribute="bottom" constant="85" id="mxb-W0-SSl"/>
+                            <constraint firstAttribute="trailing" secondItem="xmw-jJ-az4" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="980-ws-6iX"/>
+                            <constraint firstAttribute="trailing" secondItem="kY4-4y-KBr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="G0w-OS-5Na"/>
+                            <constraint firstAttribute="bottom" secondItem="kY4-4y-KBr" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="MV8-Xd-xXH"/>
+                            <constraint firstAttribute="trailing" secondItem="e9y-xE-fDa" secondAttribute="trailing" constant="39" id="NNn-4q-921"/>
+                            <constraint firstItem="gG7-xv-wY6" firstAttribute="baseline" secondItem="e9y-xE-fDa" secondAttribute="baseline" type="default" id="VMT-uO-H7m"/>
+                            <constraint firstAttribute="bottom" secondItem="xmw-jJ-az4" secondAttribute="bottom" constant="83" id="YsD-5G-wQd"/>
+                            <constraint firstAttribute="trailing" secondItem="gG7-xv-wY6" secondAttribute="trailing" constant="67" id="cph-ZK-Gkx"/>
+                            <constraint firstAttribute="bottom" secondItem="LX3-sT-pOf" secondAttribute="bottom" constant="203" id="naB-DY-YhE"/>
+                            <constraint firstAttribute="trailing" secondItem="C8O-Dm-Sb2" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="oSy-tf-WmV"/>
+                            <constraint firstItem="LX3-sT-pOf" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="pvY-RK-F0C"/>
+                            <constraint firstItem="C8O-Dm-Sb2" firstAttribute="baseline" secondItem="e9y-xE-fDa" secondAttribute="baseline" type="default" id="rPc-V7-Ked"/>
+                            <constraint firstItem="gG7-xv-wY6" firstAttribute="top" secondItem="LX3-sT-pOf" secondAttribute="top" type="default" id="wt8-80-iTd"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapSourceControl" destination="xmw-jJ-az4" id="S56-5p-RyK"/>
                         <outlet property="mapTypeControl" destination="kY4-4y-KBr" id="Ffq-2m-yED"/>
+                        <outlet property="radiusLabel" destination="e9y-xE-fDa" id="Uej-GW-SZO"/>
+                        <outlet property="radiusSlider" destination="LX3-sT-pOf" id="FRn-ll-Dhf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8D-Hk-UG0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -460,7 +503,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTh-qh-pa2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="157" y="-982"/>
+            <point key="canvasLocation" x="-123" y="-938"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EB7-Xd-2Ts">
@@ -478,7 +521,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdR-zQ-mNl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1709" y="-81"/>
+            <point key="canvasLocation" x="1489" y="-73"/>
         </scene>
     </scenes>
     <resources>
@@ -486,68 +529,6 @@
         <image name="Flag.png" width="24" height="24"/>
         <image name="number1.png" width="24" height="24"/>
     </resources>
-    <classes>
-        <class className="BusDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BusDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="myScroll" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="BusViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BusViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="busSearchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="busTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="ConfigMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigMapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapSourceControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="mapTypeControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="CustomTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="lBusCompany" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lBusName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lBusNumber" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="DetailViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="addressTitleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="headerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="removePinLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MapBusViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapBusViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="outlet" name="_mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-        <class className="MapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dimmingViewTapped:"/>
-                <relationship kind="outlet" name="dimView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="searchBarItem" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="toolBar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="topToolBar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

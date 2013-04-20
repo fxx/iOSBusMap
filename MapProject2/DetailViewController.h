@@ -10,7 +10,6 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <AddressBookUI/AddressBookUI.h>
-#import <iAd/iAd.h>
 
 @interface DetailViewController : UITableViewController
 

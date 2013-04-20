@@ -18,6 +18,7 @@
 @property (strong, nonatomic) id<ConfigurationViewControllerDelegate> delegate;
 @property (assign, nonatomic) MapSource mapSource;
 @property (assign, nonatomic) MKMapType mapType;
+@property (assign, nonatomic) int radius;
 
 @end
 
@@ -27,5 +28,6 @@
 - (void)configurationViewController:(ConfigMapViewController *)controller mapTypeChanged:(MKMapType)mapType;
 - (void)configurationViewControllerWillAddPin:(ConfigMapViewController *)controller;
 - (void)configurationViewControllerWillPrintMap:(ConfigMapViewController *)controller;
+- (void)configurationViewController:(ConfigMapViewController *)controller radiusChanged:(int)radius;
 
 @end

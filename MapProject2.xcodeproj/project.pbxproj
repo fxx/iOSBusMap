@@ -52,7 +52,6 @@
 		CE1F9FBC17059F4300975B64 /* number1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1F9FBB17059F4300975B64 /* number1.png */; };
 		CE1F9FC017059F5A00975B64 /* price.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1F9FBF17059F5A00975B64 /* price.png */; };
 		CE1F9FC217059F6500975B64 /* return.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1F9FC117059F6500975B64 /* return.png */; };
-		CE4AADA81712BE400031602E /* FindTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4AADA71712BE400031602E /* FindTableViewController.m */; };
 		CE7472ED170923F1003D0365 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7472EC170923F1003D0365 /* libsqlite3.0.dylib */; };
 		CE7612DB1706DB58006CD4D4 /* Flag.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7612DA1706DB58006CD4D4 /* Flag.png */; };
 		CE7D0184170D39490064D28A /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7D0182170D39490064D28A /* MainStoryboard.storyboard */; };
@@ -156,8 +155,6 @@
 		CE1F9FBB17059F4300975B64 /* number1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = number1.png; path = ../number1.png; sourceTree = "<group>"; };
 		CE1F9FBF17059F5A00975B64 /* price.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = price.png; sourceTree = "<group>"; };
 		CE1F9FC117059F6500975B64 /* return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return.png; sourceTree = "<group>"; };
-		CE4AADA61712BE400031602E /* FindTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindTableViewController.h; sourceTree = "<group>"; };
-		CE4AADA71712BE400031602E /* FindTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindTableViewController.m; sourceTree = "<group>"; };
 		CE7472EC170923F1003D0365 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		CE7612DA1706DB58006CD4D4 /* Flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Flag.png; path = ../Flag.png; sourceTree = "<group>"; };
 		CE7D0183170D39490064D28A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -241,7 +238,6 @@
 			children = (
 				8F677AE31715F00500AEC519 /* Entities */,
 				8FDAF44B17148051001CB76B /* Overlay */,
-				CE4AAD9C1712B9D70031602E /* Find */,
 				8F37A7701702E5F400BE3DFF /* Map */,
 				8FA1C63F16FE414600B9893D /* Bus */,
 				8F043C0116FE0948007D57D9 /* BusAppDelegate.h */,
@@ -403,15 +399,6 @@
 			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
-		CE4AAD9C1712B9D70031602E /* Find */ = {
-			isa = PBXGroup;
-			children = (
-				CE4AADA61712BE400031602E /* FindTableViewController.h */,
-				CE4AADA71712BE400031602E /* FindTableViewController.m */,
-			);
-			name = Find;
-			sourceTree = "<group>";
-		};
 		CE7612D91706D9DC006CD4D4 /* Image */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,7 +495,6 @@
 				8FA1C64216FE419700B9893D /* BusMapObject.m in Sources */,
 				8F37A7741702E6A300BE3DFF /* MapViewController.m in Sources */,
 				CE7E0C72170984270093AD1B /* CustomTableCell.m in Sources */,
-				CE4AADA81712BE400031602E /* FindTableViewController.m in Sources */,
 				8F9F66B5171469CC00659F49 /* ConfigMapViewController.m in Sources */,
 				8FDAF4551714817D001CB76B /* Overlay.m in Sources */,
 				8FDAF46A17149461001CB76B /* AFHTTPClient.m in Sources */,
