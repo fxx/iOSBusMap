@@ -16,10 +16,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Zxt-Kw-kKh" firstAttribute="bottom" secondItem="ivA-nP-hic" secondAttribute="bottom" type="default" id="4Qh-aa-BrH"/>
+                            <constraint firstItem="Zxt-Kw-kKh" firstAttribute="top" secondItem="ivA-nP-hic" secondAttribute="top" type="default" id="Evl-X5-0RW"/>
                             <constraint firstItem="Zxt-Kw-kKh" firstAttribute="trailing" secondItem="ivA-nP-hic" secondAttribute="trailing" type="default" id="H4U-Fs-iFt"/>
                             <constraint firstItem="Zxt-Kw-kKh" firstAttribute="leading" secondItem="ivA-nP-hic" secondAttribute="leading" type="default" id="MRy-QR-lkj"/>
-                            <constraint firstAttribute="bottom" secondItem="Zxt-Kw-kKh" secondAttribute="bottom" constant="-25" id="ua8-xL-ie3"/>
-                            <constraint firstItem="Zxt-Kw-kKh" firstAttribute="top" secondItem="ivA-nP-hic" secondAttribute="top" type="default" id="vws-JY-Xwe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jcF-pL-18o">
@@ -35,7 +35,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yVC-gi-C7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="936" y="-73"/>
+            <point key="canvasLocation" x="1056" y="-41"/>
         </scene>
         <!--Map Bus View Controller-->
         <scene sceneID="iQt-NS-TK3">
@@ -76,7 +76,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sS3-Ls-KUH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2054" y="-73"/>
+            <point key="canvasLocation" x="2034" y="-41"/>
         </scene>
         <!--Navigation Controller - Lộ trình-->
         <scene sceneID="07A-rx-Uxa">
@@ -98,7 +98,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EYX-9X-OYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="213" y="-17"/>
+            <point key="canvasLocation" x="213" y="-41"/>
         </scene>
         <!--Bus View Controller - Lộ trình-->
         <scene sceneID="NLT-7e-Rsd">
@@ -301,7 +301,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="919" y="-970"/>
+            <point key="canvasLocation" x="907" y="-898"/>
         </scene>
         <!--Config Map View Controller-->
         <scene sceneID="Dia-4x-nkI">
@@ -524,7 +524,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdR-zQ-mNl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1489" y="-73"/>
+            <point key="canvasLocation" x="1501" y="-41"/>
         </scene>
     </scenes>
     <resources>
@@ -532,6 +532,72 @@
         <image name="Flag.png" width="24" height="24"/>
         <image name="number1.png" width="24" height="24"/>
     </resources>
+    <classes>
+        <class className="BusDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BusDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="myScroll" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="BusViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BusViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="busSearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="busTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ConfigMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigMapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="mapSourceChanged:"/>
+                <relationship kind="action" name="mapTypeChanged:"/>
+                <relationship kind="action" name="radiusChange:"/>
+                <relationship kind="action" name="radiusDidChange:"/>
+                <relationship kind="outlet" name="mapSourceControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="mapTypeControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="radiusLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="radiusSlider" candidateClass="UISlider"/>
+            </relationships>
+        </class>
+        <class className="CustomTableCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomTableCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="lBusCompany" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lBusName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lBusNumber" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="DetailViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="addressTitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="headerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="removePinLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MapBusViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapBusViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="outlet" name="_mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="dimmingViewTapped:"/>
+                <relationship kind="outlet" name="dimView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="searchBarItem" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="toolBar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
