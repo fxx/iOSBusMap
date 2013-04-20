@@ -15,7 +15,7 @@
 #import "Placemark.h"
 
 
-@interface MapViewController ()<UISearchBarDelegate, MKMapViewDelegate, ConfigurationViewControllerDelegate> {
+@interface MapViewController ()<UISearchBarDelegate, ConfigurationViewControllerDelegate> {
     Placemark *droppedPin;
 }
 
@@ -473,5 +473,6 @@
 - (IBAction)dimmingViewTapped:(id)sender {
     [self finishSearch];
 }
+
 
 @end
