@@ -22,6 +22,7 @@
 
 @property (assign, nonatomic) MKMapType mapType;
 @property (assign, nonatomic) MapSource mapSource;
+@property (assign, nonatomic) int radius;
 
 @property (strong, nonatomic) Overlay *overlay;
 

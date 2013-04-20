@@ -141,6 +141,7 @@
     if ([segue.identifier isEqualToString:@"Config"]) {
         ConfigMapViewController *controller = segue.destinationViewController;
         controller.delegate = self;
+        controller.radius = _radius;
         controller.mapSource = _mapSource;
         controller.mapType = _mapType;
     } else if ([segue.identifier isEqualToString:@"detail"]) {
@@ -151,6 +152,11 @@
 }
 
 #pragma mark -
+
+- (void)configurationViewController:(ConfigMapViewController *)controller radiusChanged:(int)radius
+{
+    self.radius = radius;
+}
 
 - (void)configurationViewController:(ConfigMapViewController *)controller mapSourceChanged:(MapSource)mapSource
 {
