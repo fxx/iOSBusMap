@@ -40,8 +40,6 @@
 {
     [super viewDidLoad];
     
-    _searchBar.placeholder = NSLocalizedString(@"Search or Address", nil);
-    
 	// Do any additional setup after loading the view.
     
     self.locationManager = [[CLLocationManager alloc]init];
@@ -69,8 +67,6 @@
     UIBarButtonItem *userTrackingButton = [[MKUserTrackingBarButtonItem alloc] initWithMapView:_mapView];
     
     UIBarButtonItem *configurationButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPageCurl target:self action:@selector(configure:)];
-    
-    //UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     searchBarItem = [[UISearchBar alloc] initWithFrame:CGRectMake(50, 0, 220, 40) ];
     searchBarItem.placeholder = NSLocalizedString(@"Search or Address", nil);
@@ -112,7 +108,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark -

@@ -31,9 +31,6 @@
 @property (retain, nonatomic) IBOutlet UIToolbar *topToolBar;
 @property (retain, nonatomic) IBOutlet UIToolbar *toolBar;
 
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-
-
 @property (retain, nonatomic) IBOutlet UISearchBar *searchBarItem;
 
 - (IBAction)dimmingViewTapped:(id)sender;

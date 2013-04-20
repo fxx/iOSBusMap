@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="c4r-wO-dSC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G56" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="c4r-wO-dSC">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
@@ -83,7 +83,9 @@
             <objects>
                 <navigationController definesPresentationContext="YES" id="R9n-qH-46W" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Lộ trình" image="number1.png" id="xYK-18-00c"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wDs-TO-st8">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="wDs-TO-st8">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Fc0-Wl-gtC">
@@ -96,7 +98,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EYX-9X-OYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-123" y="-73"/>
+            <point key="canvasLocation" x="213" y="-17"/>
         </scene>
         <!--Bus View Controller - Lộ trình-->
         <scene sceneID="NLT-7e-Rsd">
@@ -189,6 +191,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Lộ trình" id="BvU-7j-0Lt"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <connections>
                         <outlet property="busSearchBar" destination="A6Z-ZQ-SWM" id="6vR-39-DMa"/>
                         <outlet property="busTableView" destination="2qi-aL-xZ6" id="yuq-Ht-v3F"/>
@@ -206,7 +209,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="417" y="-73"/>
+            <point key="canvasLocation" x="637" y="-41"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="dYI-jI-Ax3">
@@ -225,7 +228,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VYe-tl-v9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-718" y="-485"/>
+            <point key="canvasLocation" x="-382" y="-489"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="eod-sa-QDK">
@@ -299,7 +302,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="417" y="-938"/>
+            <point key="canvasLocation" x="919" y="-970"/>
         </scene>
         <!--Config Map View Controller-->
         <scene sceneID="Dia-4x-nkI">
@@ -389,7 +392,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8D-Hk-UG0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="936" y="-1644"/>
+            <point key="canvasLocation" x="2425" y="-892"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="rVl-MI-nNd">
@@ -478,7 +481,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNV-uE-Lrr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="936" y="-938"/>
+            <point key="canvasLocation" x="1677" y="-1415"/>
         </scene>
         <!--Navigation Controller - Map-->
         <scene sceneID="Hri-Dl-kaE">
@@ -503,14 +506,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTh-qh-pa2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-123" y="-938"/>
+            <point key="canvasLocation" x="237" y="-898"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EB7-Xd-2Ts">
             <objects>
                 <navigationController id="Gji-0j-Kvi" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aji-Dx-VEg">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="aji-Dx-VEg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
