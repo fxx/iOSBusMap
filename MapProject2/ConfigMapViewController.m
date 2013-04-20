@@ -56,7 +56,9 @@
     [_mapTypeControl setTitle:NSLocalizedString(@"Satellite", nil) forSegmentAtIndex:1];
     [_mapTypeControl setTitle:NSLocalizedString(@"Hybrid", nil) forSegmentAtIndex:2];
     _mapTypeControl.selectedSegmentIndex = _mapType;
-
+    
+    self.radiusSlider.value = self.radius;
+    self.radiusLabel.text = [NSString stringWithFormat:@"%d", self.radius];
     
 }
 
@@ -75,8 +77,18 @@
     [super viewDidUnload];
 }
 
-- (IBAction)radiusChange:(id)sender {
+- (IBAction)radiusChange:(id)sender
+{
     self.radiusLabel.text = [NSString stringWithFormat:@"%d", (int) self.radiusSlider.value];
+}
+
+- (IBAction)radiusDidChange:(id)sender
+{
+    if ([_delegate respondsToSelector:@selector(configurationViewController:radiusChanged:)])
+    {
+        [_delegate configurationViewController:self radiusChanged:(int)self.radiusSlider.value];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)dropPin:(id)sender

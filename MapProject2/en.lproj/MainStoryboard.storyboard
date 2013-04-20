@@ -328,14 +328,34 @@
                                     <action selector="mapTypeChanged:" destination="zK3-XV-tcX" eventType="valueChanged" id="0ze-W3-9ub"/>
                                 </connections>
                             </segmentedControl>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="LX3-sT-pOf">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="250" minValue="0.0" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="LX3-sT-pOf">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="177" id="xCF-ty-CG8"/>
+                                </constraints>
                                 <connections>
                                     <action selector="radiusChange:" destination="zK3-XV-tcX" eventType="valueChanged" id="xVW-sT-Nro"/>
+                                    <action selector="radiusDidChange:" destination="zK3-XV-tcX" eventType="touchUpInside" id="hYn-M7-hcS"/>
                                 </connections>
                             </slider>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="R = 100 m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9y-xE-fDa">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="250" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9y-xE-fDa">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="95" id="4nL-Ht-NcP"/>
+                                    <constraint firstAttribute="width" constant="33" id="bzw-Ix-qD2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="R = " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gG7-xv-wY6">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="34" id="Htx-3E-BuQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8O-Dm-Sb2">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="16" id="VWU-7S-pIX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -345,16 +365,19 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="kY4-4y-KBr" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="3mB-10-Abq"/>
-                            <constraint firstItem="e9y-xE-fDa" firstAttribute="top" secondItem="LX3-sT-pOf" secondAttribute="top" type="default" id="4pF-oJ-Xtg"/>
                             <constraint firstItem="xmw-jJ-az4" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="7Xv-5a-a5F"/>
                             <constraint firstAttribute="trailing" secondItem="xmw-jJ-az4" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="980-ws-6iX"/>
                             <constraint firstAttribute="trailing" secondItem="kY4-4y-KBr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="G0w-OS-5Na"/>
                             <constraint firstAttribute="bottom" secondItem="kY4-4y-KBr" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="MV8-Xd-xXH"/>
-                            <constraint firstAttribute="trailing" secondItem="e9y-xE-fDa" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="QIB-Yi-NpB"/>
+                            <constraint firstAttribute="trailing" secondItem="e9y-xE-fDa" secondAttribute="trailing" constant="39" id="NNn-4q-921"/>
+                            <constraint firstItem="gG7-xv-wY6" firstAttribute="baseline" secondItem="e9y-xE-fDa" secondAttribute="baseline" type="default" id="VMT-uO-H7m"/>
                             <constraint firstAttribute="bottom" secondItem="xmw-jJ-az4" secondAttribute="bottom" constant="83" id="YsD-5G-wQd"/>
-                            <constraint firstItem="e9y-xE-fDa" firstAttribute="leading" secondItem="LX3-sT-pOf" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Z57-uA-fUh"/>
+                            <constraint firstAttribute="trailing" secondItem="gG7-xv-wY6" secondAttribute="trailing" constant="67" id="cph-ZK-Gkx"/>
                             <constraint firstAttribute="bottom" secondItem="LX3-sT-pOf" secondAttribute="bottom" constant="203" id="naB-DY-YhE"/>
+                            <constraint firstAttribute="trailing" secondItem="C8O-Dm-Sb2" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="oSy-tf-WmV"/>
                             <constraint firstItem="LX3-sT-pOf" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="pvY-RK-F0C"/>
+                            <constraint firstItem="C8O-Dm-Sb2" firstAttribute="baseline" secondItem="e9y-xE-fDa" secondAttribute="baseline" type="default" id="rPc-V7-Ked"/>
+                            <constraint firstItem="gG7-xv-wY6" firstAttribute="top" secondItem="LX3-sT-pOf" secondAttribute="top" type="default" id="wt8-80-iTd"/>
                         </constraints>
                     </view>
                     <connections>
