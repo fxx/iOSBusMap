@@ -328,24 +328,40 @@
                                     <action selector="mapTypeChanged:" destination="zK3-XV-tcX" eventType="valueChanged" id="0ze-W3-9ub"/>
                                 </connections>
                             </segmentedControl>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="LX3-sT-pOf"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="LX3-sT-pOf">
+                                <connections>
+                                    <action selector="radiusChange:" destination="zK3-XV-tcX" eventType="valueChanged" id="xVW-sT-Nro"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="R = 100 m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9y-xE-fDa">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="95" id="4nL-Ht-NcP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="kY4-4y-KBr" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="3mB-10-Abq"/>
+                            <constraint firstItem="e9y-xE-fDa" firstAttribute="top" secondItem="LX3-sT-pOf" secondAttribute="top" type="default" id="4pF-oJ-Xtg"/>
                             <constraint firstItem="xmw-jJ-az4" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="7Xv-5a-a5F"/>
                             <constraint firstAttribute="trailing" secondItem="xmw-jJ-az4" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="980-ws-6iX"/>
                             <constraint firstAttribute="trailing" secondItem="kY4-4y-KBr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="G0w-OS-5Na"/>
-                            <constraint firstItem="LX3-sT-pOf" firstAttribute="top" secondItem="KNK-9G-AyD" secondAttribute="top" constant="141" id="JhL-3D-aha"/>
-                            <constraint firstItem="LX3-sT-pOf" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="L2s-WK-yoj"/>
                             <constraint firstAttribute="bottom" secondItem="kY4-4y-KBr" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="MV8-Xd-xXH"/>
-                            <constraint firstItem="kY4-4y-KBr" firstAttribute="top" secondItem="xmw-jJ-az4" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="SQC-3Q-GXU"/>
-                            <constraint firstAttribute="trailing" secondItem="LX3-sT-pOf" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="aNt-Q4-kIj"/>
+                            <constraint firstAttribute="trailing" secondItem="e9y-xE-fDa" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="QIB-Yi-NpB"/>
+                            <constraint firstAttribute="bottom" secondItem="xmw-jJ-az4" secondAttribute="bottom" constant="83" id="YsD-5G-wQd"/>
+                            <constraint firstItem="e9y-xE-fDa" firstAttribute="leading" secondItem="LX3-sT-pOf" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Z57-uA-fUh"/>
+                            <constraint firstAttribute="bottom" secondItem="LX3-sT-pOf" secondAttribute="bottom" constant="203" id="naB-DY-YhE"/>
+                            <constraint firstItem="LX3-sT-pOf" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="pvY-RK-F0C"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapSourceControl" destination="xmw-jJ-az4" id="S56-5p-RyK"/>
                         <outlet property="mapTypeControl" destination="kY4-4y-KBr" id="Ffq-2m-yED"/>
+                        <outlet property="radiusLabel" destination="e9y-xE-fDa" id="Uej-GW-SZO"/>
+                        <outlet property="radiusSlider" destination="LX3-sT-pOf" id="FRn-ll-Dhf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8D-Hk-UG0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -490,68 +506,6 @@
         <image name="Flag.png" width="24" height="24"/>
         <image name="number1.png" width="24" height="24"/>
     </resources>
-    <classes>
-        <class className="BusDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BusDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="myScroll" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="BusViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BusViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="busSearchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="busTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="ConfigMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigMapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapSourceControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="mapTypeControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="CustomTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="lBusCompany" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lBusName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lBusNumber" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="DetailViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="addressTitleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="headerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="removePinLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MapBusViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapBusViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="outlet" name="_mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-        <class className="MapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dimmingViewTapped:"/>
-                <relationship kind="outlet" name="dimView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="searchBarItem" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="toolBar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="topToolBar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
