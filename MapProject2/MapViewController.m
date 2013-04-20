@@ -55,6 +55,16 @@
     
     //Adding our overlay to the map
     
+    //[self.mapView setShowsUserLocation:YES];
+    
+    locationManager = [[CLLocationManager alloc] init];
+    
+    [locationManager setDelegate:self];
+    
+    [locationManager setDistanceFilter:kCLDistanceFilterNone];
+    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    
+    firstLaunch = YES;
     
     //set layout
     self.navigationItem.title = NSLocalizedString(@"Map", nil);
@@ -78,7 +88,8 @@
      _mapView.delegate = self;
     
     self.mapSource = MapSourceGoogle;
-    //self.mapType = MKMapTypeHybrid;
+    self.mapType = MKMapTypeHybrid;
+    self.radius = 200;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -98,6 +109,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     _mapView.showsUserLocation = YES;
+    //[self queryGooglePlaces:@"bus_station"];
 }
 
 
@@ -366,6 +378,14 @@
     return addressDictionary;
 }
 
+- (CLLocationDistance)getDistanceFrom:(CLLocationCoordinate2D)start to:(CLLocationCoordinate2D)end
+{
+	CLLocation *startLoccation = [[CLLocation alloc] initWithLatitude:start.latitude longitude:start.longitude];
+	CLLocation *endLoccation = [[CLLocation alloc] initWithLatitude:end.latitude longitude:end.longitude];
+    
+	return [startLoccation distanceFromLocation:endLoccation];
+}
+
 - (CLLocationCoordinate2D)coordinateFromJSON:(id)JSON
 {
     NSDictionary *location = [[JSON valueForKey:@"geometry"] valueForKey:@"location"];
@@ -432,5 +452,112 @@
     [self finishSearch];
 }
 
+#pragma mark-
+
+-(void) queryGooglePlaces: (NSString *) googleType
+{
+    NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=%d&types=%@&sensor=true&key=%@", currentCentre.latitude, currentCentre.longitude, self.radius, googleType, kGOOGLE_API_KEY];
+    
+    NSURL *googleRequestURL=[NSURL URLWithString:url];
+    
+    dispatch_async(kBgQueue, ^{
+        NSData* data = [NSData dataWithContentsOfURL: googleRequestURL];
+        [self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
+    });
+}
+
+- (void)fetchedData:(NSData *)responseData
+{
+    //parse out the json data
+    NSError* error;
+    NSDictionary* json = [NSJSONSerialization
+                          JSONObjectWithData:responseData
+                          
+                          options:kNilOptions
+                          error:&error];
+    
+    NSArray* places = [json objectForKey:@"results"];
+    
+    NSLog(@"Google Data: %@", places);
+
+    [self plotPositions:places];
+}
+
+- (void)plotPositions:(NSArray *)data
+{
+    //Remove any existing custom annotations but not the user location blue dot.
+    for (id<MKAnnotation> annotation in self.mapView.annotations)
+    {
+        if ([annotation isKindOfClass:[BusLocation class]])
+        {
+            [self.mapView removeAnnotation:annotation];
+        }
+    }
+    
+    
+    //Loop through the array of places returned from the Google API.
+    for (int i=0; i<[data count]; i++)
+    {
+        
+        //Retrieve the NSDictionary object in each index of the array.
+        NSDictionary* place = [data objectAtIndex:i];
+        
+        //There is a specific NSDictionary object that gives us location info.
+        NSDictionary *geo = [place objectForKey:@"geometry"];
+        
+        
+        //Get our name and address info for adding to a pin.
+        NSString *name=[place objectForKey:@"name"];
+        NSString *vicinity=[place objectForKey:@"vicinity"];
+        
+        //Get the lat and long for the location.
+        NSDictionary *loc = [geo objectForKey:@"location"];
+        
+        //Create a special variable to hold this coordinate info.
+        CLLocationCoordinate2D placeCoord;
+        
+        //Set the lat and long.
+        placeCoord.latitude=[[loc objectForKey:@"lat"] doubleValue];
+        placeCoord.longitude=[[loc objectForKey:@"lng"] doubleValue];
+        
+        //Create a new annotiation.
+        BusLocation *placeObject = [[BusLocation alloc] initWithName:name address:vicinity coordinate:placeCoord];
+        
+        
+        [self.mapView addAnnotation:placeObject];
+    }
+}
+/*
+- (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views
+{
+    CLLocationCoordinate2D centre = [mv centerCoordinate];
+    
+    MKCoordinateRegion region;
+    
+    if (firstLaunch)
+    {
+        region = MKCoordinateRegionMakeWithDistance(locationManager.location.coordinate,1000,1000);
+        firstLaunch=NO;
+    }
+    else
+    {
+        region = MKCoordinateRegionMakeWithDistance(centre,currentDist,currentDist);
+    }
+    
+    [mv setRegion:region animated:YES];
+    
+}*/
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    MKMapRect mRect = self.mapView.visibleMapRect;
+    MKMapPoint eastMapPoint = MKMapPointMake(MKMapRectGetMinX(mRect), MKMapRectGetMidY(mRect));
+    MKMapPoint westMapPoint = MKMapPointMake(MKMapRectGetMaxX(mRect), MKMapRectGetMidY(mRect));
+    
+    //Set our current distance instance variable.
+    currentDist = MKMetersBetweenMapPoints(eastMapPoint, westMapPoint);
+    
+    currentCentre = self.mapView.centerCoordinate;
+}
 
 @end

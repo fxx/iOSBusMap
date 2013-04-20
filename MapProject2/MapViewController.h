@@ -16,7 +16,13 @@
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
 @interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
-
+{
+    CLLocationManager *locationManager;
+    
+    CLLocationCoordinate2D currentCentre;
+    int currentDist;
+    BOOL firstLaunch;
+}
 //@property (strong, nonatomic) CLLocationManager *locationManager;
 //@property (strong, nonatomic) CLLocation *startingPoint;
 
