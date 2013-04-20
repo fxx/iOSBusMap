@@ -17,8 +17,8 @@
 
 @interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
 
-@property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) CLLocation *startingPoint;
+//@property (strong, nonatomic) CLLocationManager *locationManager;
+//@property (strong, nonatomic) CLLocation *startingPoint;
 
 @property (assign, nonatomic) MKMapType mapType;
 @property (assign, nonatomic) MapSource mapSource;
@@ -27,10 +27,7 @@
 
 @property (nonatomic, assign) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIView *dimView;
-
-//@property (retain, nonatomic) IBOutlet UIToolbar *topToolBar;
 @property (retain, nonatomic) IBOutlet UIToolbar *toolBar;
-
 @property (retain, nonatomic) IBOutlet UISearchBar *searchBarItem;
 
 - (IBAction)dimmingViewTapped:(id)sender;

@@ -15,18 +15,14 @@
 #import "Placemark.h"
 
 
-@interface MapViewController ()<UISearchBarDelegate, ConfigurationViewControllerDelegate> {
+@interface MapViewController () <UISearchBarDelegate, ConfigurationViewControllerDelegate>
+{
     Placemark *droppedPin;
 }
 
 @end
 
 @implementation MapViewController
-
-@synthesize locationManager;
-@synthesize startingPoint;
-@synthesize searchBarItem;
-
 
 - (void)awakeFromNib
 {
@@ -41,12 +37,12 @@
     [super viewDidLoad];
     
 	// Do any additional setup after loading the view.
-    
+    /*
     self.locationManager = [[CLLocationManager alloc]init];
     self.locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
-    [locationManager startUpdatingLocation];
+    [self.locationManager startUpdatingLocation];
     
     //Centering map
     CLLocationCoordinate2D coord1 = {
@@ -55,7 +51,7 @@
 	
 	MKCoordinateSpan span = {.latitudeDelta = 0.02, .longitudeDelta = 0.02};
 	MKCoordinateRegion region = {coord1, span};
-	[_mapView setRegion:region animated:YES];
+	[_mapView setRegion:region animated:YES];*/
     
     //Adding our overlay to the map
     
@@ -68,12 +64,12 @@
     
     UIBarButtonItem *configurationButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPageCurl target:self action:@selector(configure:)];
     
-    searchBarItem = [[UISearchBar alloc] initWithFrame:CGRectMake(50, 0, 220, 40) ];
-    searchBarItem.placeholder = NSLocalizedString(@"Search or Address", nil);
+    self.searchBarItem = [[UISearchBar alloc] initWithFrame:CGRectMake(50, 0, 220, 40) ];
+    self.searchBarItem.placeholder = NSLocalizedString(@"Search or Address", nil);
     
     [self.searchBarItem setDelegate:self];
     
-    UIBarButtonItem *searchBarButton = [[UIBarButtonItem alloc] initWithCustomView:searchBarItem];
+    UIBarButtonItem *searchBarButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchBarItem];
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
@@ -82,7 +78,7 @@
      _mapView.delegate = self;
     
     self.mapSource = MapSourceGoogle;
-    self.mapType = MKMapTypeHybrid;
+    //self.mapType = MKMapTypeHybrid;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -134,64 +130,11 @@
     [self refresh];
 }
 
-//update location
-//-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-//{
-//    [locationManager stopUpdatingLocation];
-//    
-//    self.startingPoint = [locations lastObject];
-//    
-//    NSLog(@"location %f, %f", startingPoint.coordinate.latitude, startingPoint.coordinate.longitude);
-//}
-//
-//- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-//{
-//    NSString *errorString = [[NSString alloc] init];
-//    
-//    switch (error.code) {
-//        case kCLErrorLocationUnknown:
-//            errorString = @"Location unknown";
-//            break;
-//            
-//        case kCLErrorDenied:
-//            errorString = @"Access denied";
-//            break;
-//            
-//        case kCLErrorNetwork:
-//            errorString = @"No network coverage";
-//            break;
-//            
-//        case kCLErrorDeferredAccuracyTooLow:
-//            errorString = @"Accuracy is too low to display";
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//    
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error getting location"
-//                                                    message:errorString
-//                                                   delegate:nil
-//                                          cancelButtonTitle:@"OK"
-//                                          otherButtonTitles:nil];
-//    [alert show];
-//}
+#pragma mark -
 
-
-//Config type map
 - (void)configure:(id)sender {
     [self performSegueWithIdentifier:@"Config" sender:self];
 }
-
--(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
-{
-    [self performSegueWithIdentifier:@"detail" sender:view];
-}
-
-//-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
-//{
-//    [self performSegueWithIdentifier:@"detail" sender:view];
-//}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -208,6 +151,7 @@
 }
 
 #pragma mark -
+
 - (void)configurationViewController:(ConfigMapViewController *)controller mapSourceChanged:(MapSource)mapSource
 {
     self.mapSource = mapSource;
@@ -218,6 +162,63 @@
     self.mapType = mapType;
 }
 
+- (void)configurationViewControllerWillAddPin:(ConfigMapViewController *)controller
+{
+    CLLocationCoordinate2D centerCoordinate = _mapView.centerCoordinate;
+    
+    [_mapView removeAnnotation:droppedPin];
+    
+    droppedPin = [[Placemark alloc] initWithCoordinate:centerCoordinate addressDictionary:nil];
+    droppedPin.coordinate = centerCoordinate;
+    droppedPin.title = NSLocalizedString(@"Dropped Pin", nil);
+    [_mapView addAnnotation:droppedPin];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/geocode/json?latlng=%f%%2C%f&sensor=true", centerCoordinate.latitude, centerCoordinate.longitude]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSString *status = [JSON valueForKeyPath:@"status"];
+        if ([status isEqualToString:@"OK"]) {
+            NSArray *results = [JSON valueForKeyPath:@"results"];
+            if (results.count > 0) {
+                NSDictionary *addressDictionary = [self addressDictionaryFromJSON:results[0]];
+                NSArray *addressLines = [addressDictionary objectForKey:@"FormattedAddressLines"];
+                if (addressLines) {
+                    droppedPin.subtitle = [addressLines componentsJoinedByString:@", "];
+                }
+                else {
+                    droppedPin.subtitle = ABCreateStringWithAddressDictionary (addressDictionary, NO);
+                }
+                droppedPin.addressDictionary = addressDictionary;
+            }
+        }
+    } failure:nil];
+    [operation start];
+}
+
+- (void)configurationViewControllerWillPrintMap:(ConfigMapViewController *)configurationViewController
+{
+    UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+    if(!controller){
+        return;
+    }
+    
+    UIPrintInteractionCompletionHandler completionHandler = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
+        if(completed && error) {
+            return;
+        }
+    };
+    
+    UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+    printInfo.outputType = UIPrintInfoOutputPhoto;
+    
+    controller.printInfo = printInfo;
+    controller.printFormatter = [_mapView viewPrintFormatter];
+    
+    [controller presentAnimated:YES completionHandler:completionHandler];
+}
+
+#pragma mark -
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation; {
 	if (annotation == mapView.userLocation) {
@@ -261,6 +262,13 @@
     return view;
 }
 
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    [self performSegueWithIdentifier:@"detail" sender:view];
+}
+
+#pragma mark-
+
 - (void)restoreSessionState {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *lastSession = [defaults objectForKey:@"LastSession"];
@@ -293,63 +301,22 @@
     [defaults setObject:lastSession forKey:@"LastSession"];
 }
 
+- (void)applicationDidEnterBackground:(NSNotification *)notification
+{
+    [self saveSessionState];
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification
+{
+    [self restoreSessionState];
+}
+
+- (void)applicationWillTerminate:(NSNotification *)notification
+{
+    [self saveSessionState];
+}
+
 #pragma mark-
-
-- (void)configurationViewControllerWillAddPin:(ConfigMapViewController *)controller
-{
-    CLLocationCoordinate2D centerCoordinate = _mapView.centerCoordinate;
-    
-    [_mapView removeAnnotation:droppedPin];
-    
-    droppedPin = [[Placemark alloc] initWithCoordinate:centerCoordinate addressDictionary:nil];
-    droppedPin.coordinate = centerCoordinate;
-    droppedPin.title = NSLocalizedString(@"Dropped Pin", nil);
-    [_mapView addAnnotation:droppedPin];
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/geocode/json?latlng=%f%%2C%f&sensor=true", centerCoordinate.latitude, centerCoordinate.longitude]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSString *status = [JSON valueForKeyPath:@"status"];
-        if ([status isEqualToString:@"OK"]) {
-            NSArray *results = [JSON valueForKeyPath:@"results"];
-            if (results.count > 0) {
-                NSDictionary *addressDictionary = [self addressDictionaryFromJSON:results[0]];
-                NSArray *addressLines = [addressDictionary objectForKey:@"FormattedAddressLines"];
-                if (addressLines) {
-                    droppedPin.subtitle = [addressLines componentsJoinedByString:@", "];
-                }
-                else {
-                //droppedPin.subtitle = ABCreateStringWithAddressDictionary (addressDictionary, NO);
-                }
-                droppedPin.addressDictionary = addressDictionary;
-            }
-        }
-    } failure:nil];
-    [operation start];
-}
-
-- (void)configurationViewControllerWillPrintMap:(ConfigMapViewController *)configurationViewController
-{
-    UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
-    if(!controller){
-        return;
-    }
-    
-    UIPrintInteractionCompletionHandler completionHandler = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
-        if(completed && error) {
-            return;
-        }
-    };
-    
-    UIPrintInfo *printInfo = [UIPrintInfo printInfo];
-    printInfo.outputType = UIPrintInfoOutputPhoto;
-    
-    controller.printInfo = printInfo;
-    controller.printFormatter = [_mapView viewPrintFormatter];
-    
-    [controller presentAnimated:YES completionHandler:completionHandler];
-}
 
 - (NSDictionary *)addressDictionaryFromJSON:(id)JSON
 {
@@ -402,22 +369,13 @@
     return coord;
 }
 
-- (void)applicationDidEnterBackground:(NSNotification *)notification
-{
-    [self saveSessionState];
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^
+     {
+         _dimView.alpha = 0.7f;
+     } completion:nil];
+    return YES;
 }
-
-- (void)applicationWillEnterForeground:(NSNotification *)notification
-{
-    [self restoreSessionState];
-}
-
-- (void)applicationWillTerminate:(NSNotification *)notification
-{
-    [self saveSessionState];
-}
-
-//button search
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSArray *annotations = _mapView.annotations;
@@ -460,7 +418,6 @@
          self.dimView.alpha = 0.0f;
      } completion:nil];
     
-    //[self.searchBar resignFirstResponder];
     [self.searchBarItem resignFirstResponder];
 }
 
