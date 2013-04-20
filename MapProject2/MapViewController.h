@@ -28,7 +28,7 @@
 @property (nonatomic, assign) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIView *dimView;
 
-@property (retain, nonatomic) IBOutlet UIToolbar *topToolBar;
+//@property (retain, nonatomic) IBOutlet UIToolbar *topToolBar;
 @property (retain, nonatomic) IBOutlet UIToolbar *toolBar;
 
 @property (retain, nonatomic) IBOutlet UISearchBar *searchBarItem;

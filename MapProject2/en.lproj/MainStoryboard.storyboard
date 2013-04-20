@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G56" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="c4r-wO-dSC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="c4r-wO-dSC">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
@@ -262,10 +262,10 @@
                             <constraint firstItem="61i-es-RL7" firstAttribute="trailing" secondItem="Fga-1X-dOh" secondAttribute="trailing" type="default" id="Nre-sq-4Nv"/>
                             <constraint firstItem="6kD-Ku-Ymu" firstAttribute="top" secondItem="Fga-1X-dOh" secondAttribute="top" type="default" id="Vap-O4-LPl"/>
                             <constraint firstItem="SXc-ux-cxh" firstAttribute="bottom" secondItem="Fga-1X-dOh" secondAttribute="bottom" type="default" id="YEW-5D-nYE"/>
-                            <constraint firstItem="SXc-ux-cxh" firstAttribute="top" secondItem="Fga-1X-dOh" secondAttribute="top" constant="88" id="YZr-cb-bDS"/>
                             <constraint firstItem="SXc-ux-cxh" firstAttribute="leading" secondItem="Fga-1X-dOh" secondAttribute="leading" type="default" id="cB4-o6-bU9"/>
                             <constraint firstItem="6kD-Ku-Ymu" firstAttribute="trailing" secondItem="Fga-1X-dOh" secondAttribute="trailing" type="default" id="cWH-Lg-cOp"/>
                             <constraint firstItem="6kD-Ku-Ymu" firstAttribute="leading" secondItem="Fga-1X-dOh" secondAttribute="leading" type="default" id="gtJ-M5-aZR"/>
+                            <constraint firstItem="SXc-ux-cxh" firstAttribute="top" secondItem="61i-es-RL7" secondAttribute="top" type="default" id="ig5-OI-NBI"/>
                             <constraint firstItem="61i-es-RL7" firstAttribute="bottom" secondItem="Fga-1X-dOh" secondAttribute="bottom" type="default" id="ofo-Ju-DXe"/>
                             <constraint firstItem="61i-es-RL7" firstAttribute="top" secondItem="6kD-Ku-Ymu" secondAttribute="bottom" type="default" id="ohm-iZ-jJI"/>
                             <constraint firstItem="SXc-ux-cxh" firstAttribute="trailing" secondItem="Fga-1X-dOh" secondAttribute="trailing" type="default" id="tjK-KM-NE7"/>
@@ -282,7 +282,6 @@
                         <outlet property="mapView" destination="61i-es-RL7" id="dK9-4v-omG"/>
                         <outlet property="searchDisplayController" destination="H0M-mk-Vag" id="7FE-e9-Uaq"/>
                         <outlet property="toolBar" destination="6kD-Ku-Ymu" id="dts-pL-3YE"/>
-                        <outlet property="topToolBar" destination="6kD-Ku-Ymu" id="zz5-JW-Oww"/>
                         <segue destination="zK3-XV-tcX" kind="modal" identifier="Config" modalTransitionStyle="partialCurl" id="Sqd-cx-y3l"/>
                         <segue destination="iXy-e1-GFx" kind="push" identifier="detail" id="NMb-Tq-He4"/>
                     </connections>
@@ -533,70 +532,6 @@
         <image name="Flag.png" width="24" height="24"/>
         <image name="number1.png" width="24" height="24"/>
     </resources>
-    <classes>
-        <class className="BusDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BusDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="myScroll" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="BusViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BusViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="busSearchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="busTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="ConfigMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigMapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapSourceControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="mapTypeControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="radiusLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="radiusSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-        <class className="CustomTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="lBusCompany" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lBusName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lBusNumber" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="DetailViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="addressTitleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="headerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="removePinLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MapBusViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapBusViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="outlet" name="_mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-        <class className="MapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dimmingViewTapped:"/>
-                <relationship kind="outlet" name="dimView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="searchBarItem" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="toolBar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="topToolBar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
