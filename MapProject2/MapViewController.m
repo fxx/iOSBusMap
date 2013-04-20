@@ -69,12 +69,15 @@
     //set layout
     self.navigationItem.title = NSLocalizedString(@"Map", nil);
     
+    UIBarButtonItem *findBusStationButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(find:)];
+    //UIBarButtonItem *findBusStationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"number1.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(find:)];
     
     UIBarButtonItem *userTrackingButton = [[MKUserTrackingBarButtonItem alloc] initWithMapView:_mapView];
     
     UIBarButtonItem *configurationButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPageCurl target:self action:@selector(configure:)];
     
-    self.searchBarItem = [[UISearchBar alloc] initWithFrame:CGRectMake(50, 0, 220, 40) ];
+    //self.searchBarItem = [[UISearchBar alloc] initWithFrame:CGRectMake(50, 0, 220, 40) ];
+    self.searchBarItem = [[UISearchBar alloc] initWithFrame:CGRectMake(60, 0, 195, 40) ];
     self.searchBarItem.placeholder = NSLocalizedString(@"Search or Address", nil);
     
     [self.searchBarItem setDelegate:self];
@@ -83,7 +86,8 @@
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
-    _toolBar.items = @[userTrackingButton, searchBarButton, configurationButton];
+    _toolBar.items = @[userTrackingButton, findBusStationButton, searchBarButton, configurationButton];
+    //_toolBar.items = @[userTrackingButton, searchBarButton, configurationButton];
     
      _mapView.delegate = self;
     
@@ -182,9 +186,18 @@
 
 - (void)configurationViewControllerWillAddPin:(ConfigMapViewController *)controller
 {
+    NSArray *annotations = _mapView.annotations;
+    for (id annotation in annotations)
+    {
+        if (annotation != _mapView.userLocation)
+        {
+            [_mapView removeAnnotation:annotation];
+        }
+    }
+    
     CLLocationCoordinate2D centerCoordinate = _mapView.centerCoordinate;
     
-    [_mapView removeAnnotation:droppedPin];
+    //[_mapView removeAnnotation:droppedPin];
     
     droppedPin = [[Placemark alloc] initWithCoordinate:centerCoordinate addressDictionary:nil];
     droppedPin.coordinate = centerCoordinate;
@@ -243,7 +256,8 @@
 		return nil;
 	}
     
-    if (annotation == droppedPin) {
+    if (annotation == droppedPin)
+    {
         MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
         annotationView.pinColor = MKPinAnnotationColorPurple;
         annotationView.canShowCallout = YES;
@@ -258,7 +272,17 @@
         
         return annotationView;
     }
-    
+    else if ([annotation isKindOfClass:[BusLocation class]])
+    {
+        MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+        //annotationView.image=[UIImage imageNamed:@"arrest.png"];
+        annotationView.pinColor = MKPinAnnotationColorGreen;
+        annotationView.enabled = YES;
+        annotationView.canShowCallout = YES;
+        annotationView.animatesDrop = YES;
+        
+        return annotationView;
+    }
 	MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
     annotationView.pinColor = MKPinAnnotationColorRed;
     annotationView.canShowCallout = YES;
@@ -453,6 +477,11 @@
 }
 
 #pragma mark-
+
+- (void)find:(id)sender
+{
+    [self queryGooglePlaces:@"bus_station"];
+}
 
 -(void) queryGooglePlaces: (NSString *) googleType
 {

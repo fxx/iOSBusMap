@@ -549,6 +549,10 @@
         <class className="ConfigMapViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigMapViewController.h"/>
             <relationships>
+                <relationship kind="action" name="mapSourceChanged:"/>
+                <relationship kind="action" name="mapTypeChanged:"/>
+                <relationship kind="action" name="radiusChange:"/>
+                <relationship kind="action" name="radiusDidChange:"/>
                 <relationship kind="outlet" name="mapSourceControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="mapTypeControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="radiusLabel" candidateClass="UILabel"/>
