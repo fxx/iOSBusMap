@@ -14,5 +14,5 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *busTableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *busSearchBar;
-@property (strong) NSArray * aBusMap;
+//@property (strong) NSArray * aBusMap;
 @end
