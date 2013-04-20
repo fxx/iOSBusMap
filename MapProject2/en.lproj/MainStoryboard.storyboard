@@ -333,10 +333,10 @@
                         <constraints>
                             <constraint firstItem="kY4-4y-KBr" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="3mB-10-Abq"/>
                             <constraint firstItem="xmw-jJ-az4" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="7Xv-5a-a5F"/>
-                            <constraint firstAttribute="trailing" secondItem="xmw-jJ-az4" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="EoD-7v-2pD"/>
-                            <constraint firstAttribute="bottom" secondItem="kY4-4y-KBr" secondAttribute="bottom" constant="22" id="PpR-et-CL3"/>
-                            <constraint firstAttribute="trailing" secondItem="kY4-4y-KBr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="TbC-wx-UEv"/>
-                            <constraint firstAttribute="bottom" secondItem="xmw-jJ-az4" secondAttribute="bottom" constant="85" id="mxb-W0-SSl"/>
+                            <constraint firstAttribute="trailing" secondItem="xmw-jJ-az4" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="980-ws-6iX"/>
+                            <constraint firstAttribute="trailing" secondItem="kY4-4y-KBr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="G0w-OS-5Na"/>
+                            <constraint firstAttribute="bottom" secondItem="kY4-4y-KBr" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="MV8-Xd-xXH"/>
+                            <constraint firstItem="kY4-4y-KBr" firstAttribute="top" secondItem="xmw-jJ-az4" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="SQC-3Q-GXU"/>
                         </constraints>
                     </view>
                     <connections>
@@ -503,6 +503,7 @@
         <class className="ConfigMapViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigMapViewController.h"/>
             <relationships>
+                <relationship kind="action" name="mapSourceChanged:"/>
                 <relationship kind="outlet" name="mapSourceControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="mapTypeControl" candidateClass="UISegmentedControl"/>
             </relationships>

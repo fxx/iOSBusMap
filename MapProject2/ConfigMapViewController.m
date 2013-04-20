@@ -27,7 +27,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     dropPinButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    dropPinButton.frame = CGRectMake(20.0f, 250, 136.0f, 46.0f);
+    dropPinButton.frame = CGRectMake(20.0f, 293, 136.0f, 46.0f);
     dropPinButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     [dropPinButton setTitle:NSLocalizedString(@"Drop Pin", nil) forState:UIControlStateNormal];
     [dropPinButton addTarget:self action:@selector(dropPin:) forControlEvents:UIControlEventTouchUpInside];
@@ -35,7 +35,7 @@
     
     printButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     printButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    printButton.frame = CGRectMake(164.0f, 250, 136.0f, 46.0f);
+    printButton.frame = CGRectMake(164.0f, 293, 136.0f, 46.0f);
     [printButton setTitle:NSLocalizedString(@"Print", nil) forState:UIControlStateNormal];
     [printButton addTarget:self action:@selector(print:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:printButton];
