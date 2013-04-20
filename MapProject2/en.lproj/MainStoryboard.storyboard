@@ -328,6 +328,7 @@
                                     <action selector="mapTypeChanged:" destination="zK3-XV-tcX" eventType="valueChanged" id="0ze-W3-9ub"/>
                                 </connections>
                             </segmentedControl>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="LX3-sT-pOf"/>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
@@ -335,8 +336,11 @@
                             <constraint firstItem="xmw-jJ-az4" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="7Xv-5a-a5F"/>
                             <constraint firstAttribute="trailing" secondItem="xmw-jJ-az4" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="980-ws-6iX"/>
                             <constraint firstAttribute="trailing" secondItem="kY4-4y-KBr" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="G0w-OS-5Na"/>
+                            <constraint firstItem="LX3-sT-pOf" firstAttribute="top" secondItem="KNK-9G-AyD" secondAttribute="top" constant="141" id="JhL-3D-aha"/>
+                            <constraint firstItem="LX3-sT-pOf" firstAttribute="leading" secondItem="KNK-9G-AyD" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="L2s-WK-yoj"/>
                             <constraint firstAttribute="bottom" secondItem="kY4-4y-KBr" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="MV8-Xd-xXH"/>
                             <constraint firstItem="kY4-4y-KBr" firstAttribute="top" secondItem="xmw-jJ-az4" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="SQC-3Q-GXU"/>
+                            <constraint firstAttribute="trailing" secondItem="LX3-sT-pOf" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="aNt-Q4-kIj"/>
                         </constraints>
                     </view>
                     <connections>
@@ -503,7 +507,6 @@
         <class className="ConfigMapViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigMapViewController.h"/>
             <relationships>
-                <relationship kind="action" name="mapSourceChanged:"/>
                 <relationship kind="outlet" name="mapSourceControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="mapTypeControl" candidateClass="UISegmentedControl"/>
             </relationships>
