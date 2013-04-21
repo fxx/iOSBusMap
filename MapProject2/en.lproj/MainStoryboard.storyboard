@@ -159,9 +159,9 @@
                                             <constraint firstItem="Gkc-yJ-X4O" firstAttribute="trailing" secondItem="o59-9E-vy9" secondAttribute="trailing" type="default" id="FvF-pD-KvE"/>
                                             <constraint firstItem="D6f-q4-acJ" firstAttribute="trailing" secondItem="o59-9E-vy9" secondAttribute="trailing" type="default" id="Msp-Q8-ZV4"/>
                                             <constraint firstItem="EgK-Jd-q8X" firstAttribute="leading" secondItem="o59-9E-vy9" secondAttribute="leading" constant="11" id="OAd-qJ-5kG"/>
-                                            <constraint firstItem="Zhr-Io-znF" firstAttribute="top" secondItem="o59-9E-vy9" secondAttribute="top" constant="11" id="fKk-Ar-ik0"/>
                                             <constraint firstItem="Gkc-yJ-X4O" firstAttribute="top" secondItem="o59-9E-vy9" secondAttribute="top" constant="7" id="gQa-Ge-VKl"/>
                                             <constraint firstItem="Zhr-Io-znF" firstAttribute="leading" secondItem="o59-9E-vy9" secondAttribute="leading" constant="45" id="lRo-4B-ST9"/>
+                                            <constraint firstItem="Zhr-Io-znF" firstAttribute="top" secondItem="o59-9E-vy9" secondAttribute="top" constant="16" id="zy1-1J-MFr"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="lBusCompany" destination="D6f-q4-acJ" id="LQR-TD-cZP"/>
@@ -528,12 +528,76 @@
         <image name="Flag.png" width="24" height="24"/>
         <image name="number1.png" width="24" height="24"/>
     </resources>
+    <classes>
+        <class className="BusDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BusDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="myScroll" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="BusViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BusViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="busSearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="busTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ConfigMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapSourceControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="mapTypeControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="miscellaneousLabel1" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="miscellaneousLabel2" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="radiusLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="radiusSlider" candidateClass="UISlider"/>
+            </relationships>
+        </class>
+        <class className="CustomTableCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomTableCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="lBusCompany" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lBusName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lBusNumber" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="DetailViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="addressTitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="headerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="removePinLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MapBusViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapBusViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="outlet" name="_mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="dimmingViewTapped:"/>
+                <relationship kind="outlet" name="dimView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="searchBarItem" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="toolBar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="5KH-rX-Wrk"/>
+        <segue reference="Sqd-cx-y3l"/>
     </inferredMetricsTieBreakers>
 </document>
