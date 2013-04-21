@@ -193,6 +193,7 @@ sqlite3_stmt *statement;
         controller.delegate = self;
         controller.mapSource = _mapSource;
         controller.mapType = _mapType;
+        controller.hidden = YES;
     } 
 }
 
@@ -224,7 +225,7 @@ sqlite3_stmt *statement;
 - (void)setMapType:(MKMapType)mapType {
     _mapType = mapType;
     _mapView.mapType = mapType;
-    
+    [self refresh];
 }
 
 @end

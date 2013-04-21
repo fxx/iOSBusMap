@@ -12,13 +12,10 @@
 #import "Overlay.h"
 #import "OverlayView.h"
 #import "AFNetworking.h"
-#import "Placemark.h"
 
 
-@interface MapViewController () <UISearchBarDelegate, ConfigurationViewControllerDelegate>
-{
-    Placemark *droppedPin;
-}
+
+@interface MapViewController () <ConfigurationViewControllerDelegate>
 
 @end
 
@@ -137,6 +134,7 @@
         controller.radius = _radius;
         controller.mapSource = _mapSource;
         controller.mapType = _mapType;
+        controller.hidden = NO;
     } else if ([segue.identifier isEqualToString:@"detail"]) {
         DetailViewController *controller = segue.destinationViewController;
         controller.mapView = _mapView;

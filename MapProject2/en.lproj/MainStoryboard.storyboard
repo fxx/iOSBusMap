@@ -382,6 +382,8 @@
                     <connections>
                         <outlet property="mapSourceControl" destination="xmw-jJ-az4" id="S56-5p-RyK"/>
                         <outlet property="mapTypeControl" destination="kY4-4y-KBr" id="Ffq-2m-yED"/>
+                        <outlet property="miscellaneousLabel1" destination="gG7-xv-wY6" id="uYt-oK-5s8"/>
+                        <outlet property="miscellaneousLabel2" destination="C8O-Dm-Sb2" id="eOQ-iF-VcC"/>
                         <outlet property="radiusLabel" destination="e9y-xE-fDa" id="Uej-GW-SZO"/>
                         <outlet property="radiusSlider" destination="LX3-sT-pOf" id="FRn-ll-Dhf"/>
                     </connections>

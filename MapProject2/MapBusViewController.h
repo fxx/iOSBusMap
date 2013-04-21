@@ -21,6 +21,7 @@
     int currenDist;
     BOOL firstLaunch;
 }
+
 @property (assign, nonatomic) MKMapType mapType;
 @property (assign, nonatomic) MapSource mapSource;
 

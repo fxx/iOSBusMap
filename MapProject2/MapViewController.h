@@ -11,13 +11,15 @@
 #import <CoreLocation/CoreLocation.h>
 #import "Overlay.h"
 #import "BusLocation.h"
+#import "Placemark.h"
 
 #define kGOOGLE_API_KEY @"AIzaSyDvqn0DRnpIX585W77lUJ4e8vTCReMn6xA"
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
-@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate>
 {
     CLLocationManager *locationManager;
+    Placemark *droppedPin;
 }
 
 @property (assign, nonatomic) MKMapType mapType;

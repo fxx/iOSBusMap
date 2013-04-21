@@ -9,15 +9,7 @@
 #import "ConfigMapViewController.h"
 #import "MapViewController.h"
 
-@interface ConfigMapViewController (){
-    UIButton *dropPinButton;
-    UIButton *printButton;
-}
-
-@property (weak, nonatomic) IBOutlet UISlider *radiusSlider;
-@property (weak, nonatomic) IBOutlet UILabel *radiusLabel;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *mapSourceControl;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *mapTypeControl;
+@interface ConfigMapViewController ()
 
 @end
 
@@ -29,25 +21,38 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //CGFloat y = _mapSourceControl.frame.origin.y - 18.0f - 46.0f;
-    dropPinButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    dropPinButton.frame = CGRectMake(20.0f, 270, 136.0f, 46.0f);
-    dropPinButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [dropPinButton setTitle:NSLocalizedString(@"Drop Pin", nil) forState:UIControlStateNormal];
-    [dropPinButton addTarget:self action:@selector(dropPin:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:dropPinButton];
-    
-    printButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    printButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    printButton.frame = CGRectMake(164.0f, 270, 136.0f, 46.0f);
-    [printButton setTitle:NSLocalizedString(@"Print", nil) forState:UIControlStateNormal];
-    [printButton addTarget:self action:@selector(print:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:printButton];
-    
-    UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
-    if (!controller) {
-        printButton.enabled = NO;
+    if (self.hidden == NO)
+    {
+        dropPinButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        dropPinButton.frame = CGRectMake(20.0f, 270, 136.0f, 46.0f);
+        dropPinButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+        [dropPinButton setTitle:NSLocalizedString(@"Drop Pin", nil) forState:UIControlStateNormal];
+        [dropPinButton addTarget:self action:@selector(dropPin:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:dropPinButton];
+        
+        printButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        printButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+        printButton.frame = CGRectMake(164.0f, 270, 136.0f, 46.0f);
+        [printButton setTitle:NSLocalizedString(@"Print", nil) forState:UIControlStateNormal];
+        [printButton addTarget:self action:@selector(print:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:printButton];
+        
+        UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+        if (!controller) {
+            printButton.enabled = NO;
+        }
+        
+        self.radiusSlider.value = self.radius;
+        self.radiusLabel.text = [NSString stringWithFormat:@"%d", self.radius];
     }
-    
+    else
+    {
+        self.radiusSlider.hidden = YES;
+        self.radiusLabel.hidden = YES;
+        self.miscellaneousLabel1.hidden = YES;
+        self.miscellaneousLabel2.hidden = YES;
+    }
+        
     [_mapSourceControl setTitle:NSLocalizedString(@"Standard", nil) forSegmentAtIndex:0];
     [_mapSourceControl setTitle:NSLocalizedString(@"Classic", nil) forSegmentAtIndex:1];
     _mapSourceControl.selectedSegmentIndex = _mapSource;
@@ -56,9 +61,6 @@
     [_mapTypeControl setTitle:NSLocalizedString(@"Satellite", nil) forSegmentAtIndex:1];
     [_mapTypeControl setTitle:NSLocalizedString(@"Hybrid", nil) forSegmentAtIndex:2];
     _mapTypeControl.selectedSegmentIndex = _mapType;
-    
-    self.radiusSlider.value = self.radius;
-    self.radiusLabel.text = [NSString stringWithFormat:@"%d", self.radius];
     
 }
 
