@@ -45,8 +45,6 @@
     [locationManager setDistanceFilter:kCLDistanceFilterNone];
     [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     
-    firstLaunch = YES;
-    
     //set layout
     self.navigationItem.title = NSLocalizedString(@"Map", nil);
     
@@ -465,7 +463,8 @@
 
 -(void) queryGooglePlaces: (NSString *) googleType
 {
-    NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=%d&types=%@&sensor=true&key=%@", currentCentre.latitude, currentCentre.longitude, self.radius, googleType, kGOOGLE_API_KEY];
+    CLLocationCoordinate2D centerCoordinate = _mapView.centerCoordinate;
+    NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=%d&types=%@&sensor=true&key=%@", centerCoordinate.latitude, centerCoordinate.longitude, self.radius, googleType, kGOOGLE_API_KEY];
     
     NSURL *googleRequestURL=[NSURL URLWithString:url];
     
@@ -526,38 +525,6 @@
         
         [self.mapView addAnnotation:placeObject];
     }
-}
-
-/*- (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views
-{
-    CLLocationCoordinate2D centre = [mv centerCoordinate];
-    
-    MKCoordinateRegion region;
-    
-    if (firstLaunch)
-    {
-        region = MKCoordinateRegionMakeWithDistance(locationManager.location.coordinate,1000,1000);
-        firstLaunch=NO;
-    }
-    else
-    {
-        region = MKCoordinateRegionMakeWithDistance(centre,currentDist,currentDist);
-    }
-    
-    [mv setRegion:region animated:YES];
- 
-}*/
-
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
-{
-    MKMapRect mRect = self.mapView.visibleMapRect;
-    MKMapPoint eastMapPoint = MKMapPointMake(MKMapRectGetMinX(mRect), MKMapRectGetMidY(mRect));
-    MKMapPoint westMapPoint = MKMapPointMake(MKMapRectGetMaxX(mRect), MKMapRectGetMidY(mRect));
-    
-    //Set our current distance instance variable.
-    currentDist = MKMetersBetweenMapPoints(eastMapPoint, westMapPoint);
-    
-    currentCentre = self.mapView.centerCoordinate;
 }
 
 @end

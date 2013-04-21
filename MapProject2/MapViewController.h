@@ -18,10 +18,6 @@
 @interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
 {
     CLLocationManager *locationManager;
-    
-    CLLocationCoordinate2D currentCentre;
-    int currentDist;
-    BOOL firstLaunch;
 }
 
 @property (assign, nonatomic) MKMapType mapType;
