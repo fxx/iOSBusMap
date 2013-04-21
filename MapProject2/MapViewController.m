@@ -92,7 +92,7 @@
      _mapView.delegate = self;
     
     self.mapSource = MapSourceGoogle;
-    self.mapType = MKMapTypeHybrid;
+    //self.mapType = MKMapTypeHybrid;
     self.radius = 200;
 }
 
@@ -473,7 +473,8 @@
 
 
 - (IBAction)dimmingViewTapped:(id)sender {
-    [self finishSearch];
+    //[self finishSearch];
+    NSLog(@"finish search");
 }
 
 #pragma mark-
@@ -515,14 +516,19 @@
 - (void)plotPositions:(NSArray *)data
 {
     //Remove any existing custom annotations but not the user location blue dot.
-    for (id<MKAnnotation> annotation in self.mapView.annotations)
+    /*for (id<MKAnnotation> annotation in self.mapView.annotations)
     {
         if ([annotation isKindOfClass:[BusLocation class]])
         {
             [self.mapView removeAnnotation:annotation];
         }
+    }*/
+    NSArray *annotations = _mapView.annotations;
+    for (id annotation in annotations) {
+        if (annotation != _mapView.userLocation) {
+            [_mapView removeAnnotation:annotation];
+        }
     }
-    
     
     //Loop through the array of places returned from the Google API.
     for (int i=0; i<[data count]; i++)

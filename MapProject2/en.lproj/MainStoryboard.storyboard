@@ -253,7 +253,7 @@
                                 </connections>
                             </mapView>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXc-ux-cxh">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -289,7 +289,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YP8-Ab-AZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="82B-k3-8wU">
                     <connections>
-                        <action selector="dimmingViewTapped:" destination="U2e-0q-dKQ" id="Trc-OG-cVx"/>
+                        <action selector="dimmingViewTapped:" destination="U2e-0q-dKQ" id="lvv-X6-LEM"/>
                     </connections>
                 </tapGestureRecognizer>
                 <searchDisplayController id="H0M-mk-Vag">
@@ -549,10 +549,6 @@
         <class className="ConfigMapViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigMapViewController.h"/>
             <relationships>
-                <relationship kind="action" name="mapSourceChanged:"/>
-                <relationship kind="action" name="mapTypeChanged:"/>
-                <relationship kind="action" name="radiusChange:"/>
-                <relationship kind="action" name="radiusDidChange:"/>
                 <relationship kind="outlet" name="mapSourceControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="mapTypeControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="radiusLabel" candidateClass="UILabel"/>
