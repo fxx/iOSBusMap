@@ -14,11 +14,24 @@
 @protocol ConfigurationViewControllerDelegate;
 
 @interface ConfigMapViewController : UIViewController
+{
+    UIButton *dropPinButton;
+    UIButton *printButton;
+}
 
 @property (strong, nonatomic) id<ConfigurationViewControllerDelegate> delegate;
+
 @property (assign, nonatomic) MapSource mapSource;
 @property (assign, nonatomic) MKMapType mapType;
 @property (assign, nonatomic) int radius;
+
+@property (assign, nonatomic) BOOL hidden;
+@property (weak, nonatomic) IBOutlet UISlider *radiusSlider;
+@property (weak, nonatomic) IBOutlet UILabel *radiusLabel;
+@property (weak, nonatomic) IBOutlet UILabel *miscellaneousLabel1;
+@property (weak, nonatomic) IBOutlet UILabel *miscellaneousLabel2;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *mapSourceControl;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *mapTypeControl;
 
 @end
 

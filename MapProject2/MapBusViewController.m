@@ -22,15 +22,6 @@ sqlite3 *DB;
 sqlite3_stmt *statement;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -39,7 +30,7 @@ sqlite3_stmt *statement;
 	
     self.mapSource = MapSourceStandard;
     
-    [self plotCrimePositions];
+    [self plotPositions];
 }
 
 - (void)viewDidUnload
@@ -54,6 +45,117 @@ sqlite3_stmt *statement;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // Ensure that we can view our own location in the map view.
+    [self._mapView setShowsUserLocation:YES];
+    
+    //Instantiate a location object.
+    locationManager = [[CLLocationManager alloc] init];
+    
+    //Make this controller the delegate for the location manager.
+    [locationManager setDelegate:self];
+    
+    //Set some paramater for the location object.
+    [locationManager setDistanceFilter:kCLDistanceFilterNone];
+    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    
+    // 1ΩΩ
+    /*CLLocationCoordinate2D zoomLocation;
+    zoomLocation.latitude = 20.999913;
+    zoomLocation.longitude= 105.84535;
+    
+    // 2
+    MKCoordinateSpan span = {.latitudeDelta = 0.02, .longitudeDelta = 0.02};
+    
+    // 3
+    //MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:viewRegion];
+    
+    MKCoordinateRegion adjustedRegion = {zoomLocation, span};
+	[_mapView setRegion:adjustedRegion animated:YES];
+    
+    // 4
+    [_mapView setRegion:adjustedRegion animated:YES];*/
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+- (void)plotPositions
+{
+    
+    for (id<MKAnnotation> annotation in _mapView.annotations)
+    {
+        [_mapView removeAnnotation:annotation];
+    }
+    
+    // Doc DB va khoi tao
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"hn" ofType:@"sqlite"];
+    
+    if (sqlite3_open_v2([path UTF8String], &DB, SQLITE_OPEN_READWRITE, NULL) == 0){
+        
+        NSString* firstName = [NSString stringWithFormat: @"SELECT * FROM location WHERE description = %@", idMapBus];
+        
+        const char *sqlStatement = [firstName UTF8String];
+        
+        if (sqlite3_prepare_v2(DB, sqlStatement, -1, &statement, NULL) == SQLITE_OK){
+            NSInteger index = 0;
+            while (sqlite3_step(statement) == SQLITE_ROW){
+                NSNumber * latitude = [NSNumber numberWithDouble:sqlite3_column_double(statement, 1)];
+                NSNumber * longitude = [NSNumber numberWithDouble:sqlite3_column_double(statement, 2)];
+                
+                NSString * crimeDescription =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                NSString * address = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                
+                CLLocationCoordinate2D coordinate;
+                coordinate.latitude = latitude.doubleValue;
+                coordinate.longitude = longitude.doubleValue;
+                
+                if (index == 5) {
+                    //[_mapView setCenterCoordinate:coordinate animated:NO];
+                    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coordinate, 1500, 1500);
+                    [_mapView setRegion:viewRegion animated:YES];
+                }
+                
+                BusLocation *annotation = [[BusLocation alloc] initWithName:crimeDescription address:address coordinate:coordinate] ;
+                [_mapView addAnnotation:annotation];
+                index++;
+            }
+        }
+    }
+
+    sqlite3_finalize(statement);
+    
+}
+
+-(IBAction)cancel:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
@@ -80,106 +182,6 @@ sqlite3_stmt *statement;
     return nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    // Ensure that we can view our own location in the map view.
-    [self._mapView setShowsUserLocation:YES];
-    
-    //Instantiate a location object.
-    locationManager = [[CLLocationManager alloc] init];
-    
-    //Make this controller the delegate for the location manager.
-    [locationManager setDelegate:self];
-    
-    //Set some paramater for the location object.
-    [locationManager setDistanceFilter:kCLDistanceFilterNone];
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    
-    // 1ΩΩ
-    CLLocationCoordinate2D zoomLocation;
-    zoomLocation.latitude = 20.999913;
-    zoomLocation.longitude= 105.84535;
-    
-    // 2
-    MKCoordinateSpan span = {.latitudeDelta = 0.02, .longitudeDelta = 0.02};
-    
-    // 3
-    //MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:viewRegion];
-    
-    MKCoordinateRegion adjustedRegion = {zoomLocation, span};
-	[_mapView setRegion:adjustedRegion animated:YES];
-    
-    // 4
-    [_mapView setRegion:adjustedRegion animated:YES];
-    
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
-
-- (void)plotCrimePositions{
-    
-    for (id<MKAnnotation> annotation in _mapView.annotations) {
-        [_mapView removeAnnotation:annotation];
-    }
-    
-    // Doc DB va khoi tao
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"hn" ofType:@"sqlite"];
-    
-    if (sqlite3_open_v2([path UTF8String], &DB, SQLITE_OPEN_READWRITE, NULL) == 0){
-        
-        NSString* firstName = [NSString stringWithFormat: @"SELECT * FROM location WHERE description = %@", idMapBus];
-        
-        const char *sqlStatement = [firstName UTF8String];
-        
-        if (sqlite3_prepare_v2(DB, sqlStatement, -1, &statement, NULL) == SQLITE_OK){
-         
-            while (sqlite3_step(statement) == SQLITE_ROW){
-                NSNumber * latitude = [NSNumber numberWithDouble:sqlite3_column_double(statement, 1)];
-                NSNumber * longitude = [NSNumber numberWithDouble:sqlite3_column_double(statement, 2)];
-                
-                NSString * crimeDescription =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                NSString * address = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
-                
-                CLLocationCoordinate2D coordinate;
-                coordinate.latitude = latitude.doubleValue;
-                coordinate.longitude = longitude.doubleValue;
-                
-                
-                BusLocation *annotation = [[BusLocation alloc] initWithName:crimeDescription address:address coordinate:coordinate] ;
-                [_mapView addAnnotation:annotation];
-            }
-        }
-    }
-
-    sqlite3_finalize(statement);
-    
-}
-
--(IBAction)cancel:(id)sender{
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
 {
     OverlayView *view = [[OverlayView alloc] initWithOverlay:overlay];
@@ -193,6 +195,7 @@ sqlite3_stmt *statement;
         controller.delegate = self;
         controller.mapSource = _mapSource;
         controller.mapType = _mapType;
+        controller.hidden = YES;
     } 
 }
 
@@ -224,7 +227,7 @@ sqlite3_stmt *statement;
 - (void)setMapType:(MKMapType)mapType {
     _mapType = mapType;
     _mapView.mapType = mapType;
-    
+    [self refresh];
 }
 
 @end
