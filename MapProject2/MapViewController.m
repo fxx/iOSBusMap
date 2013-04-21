@@ -477,7 +477,6 @@
 
 - (void)fetchedData:(NSData *)responseData
 {
-    //parse out the json data
     NSError* error;
     NSDictionary* json = [NSJSONSerialization
                           JSONObjectWithData:responseData
@@ -494,7 +493,6 @@
 
 - (void)plotPositions:(NSArray *)data
 {
-    //Remove any existing custom annotations but not the user location blue dot.
     /*for (id<MKAnnotation> annotation in self.mapView.annotations)
     {
         if ([annotation isKindOfClass:[BusLocation class]])
@@ -502,6 +500,7 @@
             [self.mapView removeAnnotation:annotation];
         }
     }*/
+    
     NSArray *annotations = _mapView.annotations;
     for (id annotation in annotations) {
         if (annotation != _mapView.userLocation) {
@@ -509,34 +508,21 @@
         }
     }
     
-    //Loop through the array of places returned from the Google API.
     for (int i=0; i<[data count]; i++)
     {
-        
-        //Retrieve the NSDictionary object in each index of the array.
         NSDictionary* place = [data objectAtIndex:i];
         
-        //There is a specific NSDictionary object that gives us location info.
         NSDictionary *geo = [place objectForKey:@"geometry"];
         
-        
-        //Get our name and address info for adding to a pin.
         NSString *name=[place objectForKey:@"name"];
         NSString *vicinity=[place objectForKey:@"vicinity"];
-        
-        //Get the lat and long for the location.
         NSDictionary *loc = [geo objectForKey:@"location"];
         
-        //Create a special variable to hold this coordinate info.
         CLLocationCoordinate2D placeCoord;
-        
-        //Set the lat and long.
         placeCoord.latitude=[[loc objectForKey:@"lat"] doubleValue];
         placeCoord.longitude=[[loc objectForKey:@"lng"] doubleValue];
         
-        //Create a new annotiation.
         BusLocation *placeObject = [[BusLocation alloc] initWithName:name address:vicinity coordinate:placeCoord];
-        
         
         [self.mapView addAnnotation:placeObject];
     }
