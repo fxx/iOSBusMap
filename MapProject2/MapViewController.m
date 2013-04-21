@@ -37,25 +37,6 @@
     [super viewDidLoad];
     
 	// Do any additional setup after loading the view.
-    /*
-    self.locationManager = [[CLLocationManager alloc]init];
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    
-    [self.locationManager startUpdatingLocation];
-    
-    //Centering map
-    CLLocationCoordinate2D coord1 = {
-		20.999913,105.84535
-	};
-	
-	MKCoordinateSpan span = {.latitudeDelta = 0.02, .longitudeDelta = 0.02};
-	MKCoordinateRegion region = {coord1, span};
-	[_mapView setRegion:region animated:YES];*/
-    
-    //Adding our overlay to the map
-    
-    //[self.mapView setShowsUserLocation:YES];
     
     locationManager = [[CLLocationManager alloc] init];
     
@@ -195,9 +176,9 @@
         }
     }
     
-    CLLocationCoordinate2D centerCoordinate = _mapView.centerCoordinate;
-    
     //[_mapView removeAnnotation:droppedPin];
+    
+    CLLocationCoordinate2D centerCoordinate = _mapView.centerCoordinate;
     
     droppedPin = [[Placemark alloc] initWithCoordinate:centerCoordinate addressDictionary:nil];
     droppedPin.coordinate = centerCoordinate;
@@ -252,23 +233,23 @@
 
 #pragma mark -
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation; {
-	if (annotation == mapView.userLocation) {
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+	if (annotation == mapView.userLocation)
+    {
 		return nil;
 	}
     
     if (annotation == droppedPin)
     {
         MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+        
         annotationView.pinColor = MKPinAnnotationColorPurple;
         annotationView.canShowCallout = YES;
         annotationView.animatesDrop = YES;
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-            annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        }
-        
-        annotationView.annotation = annotation;
+
         annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        annotationView.annotation = annotation;
         [mapView selectAnnotation:annotation animated:YES];
         
         return annotationView;
@@ -276,7 +257,7 @@
     else if ([annotation isKindOfClass:[BusLocation class]])
     {
         MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
-        //annotationView.image=[UIImage imageNamed:@"arrest.png"];
+        
         annotationView.pinColor = MKPinAnnotationColorGreen;
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
@@ -285,15 +266,13 @@
         return annotationView;
     }
 	MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+    
     annotationView.pinColor = MKPinAnnotationColorRed;
     annotationView.canShowCallout = YES;
     annotationView.animatesDrop = YES;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    }
     
-	annotationView.annotation = annotation;
     annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+	annotationView.annotation = annotation;
     [mapView selectAnnotation:annotation animated:YES];
     
 	return annotationView;
