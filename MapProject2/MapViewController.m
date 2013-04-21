@@ -475,8 +475,8 @@
 
 
 - (IBAction)dimmingViewTapped:(id)sender {
-    //[self finishSearch];
-    NSLog(@"finish search");
+    [self finishSearch];
+    //NSLog(@"finish search");
 }
 
 #pragma mark-
@@ -565,7 +565,7 @@
     }
 }
 
-- (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views
+/*- (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views
 {
     CLLocationCoordinate2D centre = [mv centerCoordinate];
     
@@ -582,8 +582,8 @@
     }
     
     [mv setRegion:region animated:YES];
-    
-}
+ 
+}*/
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {

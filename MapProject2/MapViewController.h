@@ -23,8 +23,6 @@
     int currentDist;
     BOOL firstLaunch;
 }
-//@property (strong, nonatomic) CLLocationManager *locationManager;
-//@property (strong, nonatomic) CLLocation *startingPoint;
 
 @property (assign, nonatomic) MKMapType mapType;
 @property (assign, nonatomic) MapSource mapSource;
