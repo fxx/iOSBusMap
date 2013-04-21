@@ -209,6 +209,7 @@
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *status = [JSON valueForKeyPath:@"status"];
+        NSLog(@"JSON PinCenter: %@", JSON);
         if ([status isEqualToString:@"OK"]) {
             NSArray *results = [JSON valueForKeyPath:@"results"];
             if (results.count > 0) {
@@ -441,6 +442,7 @@
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *status = [JSON valueForKeyPath:@"status"];
+        NSLog(@"JSON Search: %@", JSON);
         if ([status isEqualToString:@"OK"]) {
             NSArray *results = [JSON valueForKeyPath:@"results"];
             NSInteger index = 0;
@@ -562,7 +564,7 @@
         [self.mapView addAnnotation:placeObject];
     }
 }
-/*
+
 - (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views
 {
     CLLocationCoordinate2D centre = [mv centerCoordinate];
@@ -581,7 +583,7 @@
     
     [mv setRegion:region animated:YES];
     
-}*/
+}
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {

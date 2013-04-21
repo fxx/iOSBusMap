@@ -13,10 +13,14 @@
 #import "Overlay.h"
 
 
-@interface MapBusViewController : UIViewController<MKMapViewDelegate>{
-    BOOL _doneInitialZoom;
+@interface MapBusViewController : UIViewController<MKMapViewDelegate, CLLocationManagerDelegate>
+{
+    CLLocationManager *locationManager;
+    
+    CLLocationCoordinate2D currentCentre;
+    int currenDist;
+    BOOL firstLaunch;
 }
-
 @property (assign, nonatomic) MKMapType mapType;
 @property (assign, nonatomic) MapSource mapSource;
 

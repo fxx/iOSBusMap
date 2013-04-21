@@ -84,6 +84,19 @@ sqlite3_stmt *statement;
 {
     [super viewWillAppear:animated];
     
+    // Ensure that we can view our own location in the map view.
+    [self._mapView setShowsUserLocation:YES];
+    
+    //Instantiate a location object.
+    locationManager = [[CLLocationManager alloc] init];
+    
+    //Make this controller the delegate for the location manager.
+    [locationManager setDelegate:self];
+    
+    //Set some paramater for the location object.
+    [locationManager setDistanceFilter:kCLDistanceFilterNone];
+    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    
     // 1ΩΩ
     CLLocationCoordinate2D zoomLocation;
     zoomLocation.latitude = 20.999913;
