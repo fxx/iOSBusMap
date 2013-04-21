@@ -51,7 +51,6 @@
     self.navigationItem.title = NSLocalizedString(@"Map", nil);
     
     UIBarButtonItem *findBusStationButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(find:)];
-    //UIBarButtonItem *findBusStationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"number1.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(find:)];
     
     UIBarButtonItem *userTrackingButton = [[MKUserTrackingBarButtonItem alloc] initWithMapView:_mapView];
     
@@ -94,7 +93,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     _mapView.showsUserLocation = YES;
-    //[self queryGooglePlaces:@"bus_station"];
 }
 
 
@@ -453,9 +451,9 @@
 }
 
 
-- (IBAction)dimmingViewTapped:(id)sender {
+- (IBAction)dimmingViewTapped:(id)sender
+{
     [self finishSearch];
-    //NSLog(@"finish search");
 }
 
 #pragma mark-
