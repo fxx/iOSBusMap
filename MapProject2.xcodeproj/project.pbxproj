@@ -13,9 +13,6 @@
 		8F043BFD16FE0948007D57D9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8F043BFB16FE0948007D57D9 /* InfoPlist.strings */; };
 		8F043BFF16FE0948007D57D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F043BFE16FE0948007D57D9 /* main.m */; };
 		8F043C0316FE0948007D57D9 /* BusAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F043C0216FE0948007D57D9 /* BusAppDelegate.m */; };
-		8F043C0516FE0948007D57D9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F043C0416FE0948007D57D9 /* Default.png */; };
-		8F043C0716FE0948007D57D9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F043C0616FE0948007D57D9 /* Default@2x.png */; };
-		8F043C0916FE0948007D57D9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F043C0816FE0948007D57D9 /* Default-568h@2x.png */; };
 		8F37A7741702E6A300BE3DFF /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F37A7731702E6A300BE3DFF /* MapViewController.m */; };
 		8F37A7761702E70F00BE3DFF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F37A7751702E70F00BE3DFF /* MapKit.framework */; };
 		8F37A7781702E71C00BE3DFF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F37A7771702E71C00BE3DFF /* CoreLocation.framework */; };
@@ -47,6 +44,7 @@
 		8FFB66D11715C5DD003D1B98 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FFB66D01715C5DD003D1B98 /* MobileCoreServices.framework */; };
 		8FFB66EA1715CA27003D1B98 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FFB66E91715CA27003D1B98 /* libz.dylib */; };
 		B5900264172409120071E2B2 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5900263172409120071E2B2 /* Icon@2x.png */; };
+		B590026817240A3C0071E2B2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B590026717240A3C0071E2B2 /* Default@2x.png */; };
 		CE1F9FB817059F2F00975B64 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1F9FB717059F2F00975B64 /* clock.png */; };
 		CE1F9FBA17059F3800975B64 /* goto.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1F9FB917059F3800975B64 /* goto.png */; };
 		CE1F9FBC17059F4300975B64 /* number1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1F9FBB17059F4300975B64 /* number1.png */; };
@@ -72,9 +70,6 @@
 		8F043C0016FE0948007D57D9 /* MapProject2-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MapProject2-Prefix.pch"; sourceTree = "<group>"; };
 		8F043C0116FE0948007D57D9 /* BusAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BusAppDelegate.h; sourceTree = "<group>"; };
 		8F043C0216FE0948007D57D9 /* BusAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BusAppDelegate.m; sourceTree = "<group>"; };
-		8F043C0416FE0948007D57D9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		8F043C0616FE0948007D57D9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		8F043C0816FE0948007D57D9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8F37A7721702E6A300BE3DFF /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		8F37A7731702E6A300BE3DFF /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		8F37A7751702E70F00BE3DFF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -126,6 +121,8 @@
 		8FFB66D01715C5DD003D1B98 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		8FFB66E91715CA27003D1B98 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		B5900263172409120071E2B2 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		B590026717240A3C0071E2B2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		B590026917240A790071E2B2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CE1F9FB717059F2F00975B64 /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
 		CE1F9FB917059F3800975B64 /* goto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goto.png; path = ../goto.png; sourceTree = "<group>"; };
 		CE1F9FBB17059F4300975B64 /* number1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = number1.png; path = ../number1.png; sourceTree = "<group>"; };
@@ -170,6 +167,8 @@
 		8F043BE316FE0948007D57D9 = {
 			isa = PBXGroup;
 			children = (
+				B590026917240A790071E2B2 /* Default-568h@2x.png */,
+				B590026717240A3C0071E2B2 /* Default@2x.png */,
 				B5900263172409120071E2B2 /* Icon@2x.png */,
 				8FDAF45617149461001CB76B /* AFNetworking */,
 				8F043BF816FE0948007D57D9 /* MapProject2 */,
@@ -231,9 +230,6 @@
 				8F043BFB16FE0948007D57D9 /* InfoPlist.strings */,
 				8F043BFE16FE0948007D57D9 /* main.m */,
 				8F043C0016FE0948007D57D9 /* MapProject2-Prefix.pch */,
-				8F043C0416FE0948007D57D9 /* Default.png */,
-				8F043C0616FE0948007D57D9 /* Default@2x.png */,
-				8F043C0816FE0948007D57D9 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -402,9 +398,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F043BFD16FE0948007D57D9 /* InfoPlist.strings in Resources */,
-				8F043C0516FE0948007D57D9 /* Default.png in Resources */,
-				8F043C0716FE0948007D57D9 /* Default@2x.png in Resources */,
-				8F043C0916FE0948007D57D9 /* Default-568h@2x.png in Resources */,
 				CEE3A2111704D189007EF150 /* 4.png in Resources */,
 				CE1F9FB817059F2F00975B64 /* clock.png in Resources */,
 				CE1F9FBA17059F3800975B64 /* goto.png in Resources */,
@@ -416,6 +409,7 @@
 				8F677AE81715FBB000AEC519 /* arrest.png in Resources */,
 				8FA03F4F1719A49300787B13 /* hn.sqlite in Resources */,
 				B5900264172409120071E2B2 /* Icon@2x.png in Resources */,
+				B590026817240A3C0071E2B2 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
