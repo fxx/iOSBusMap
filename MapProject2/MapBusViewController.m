@@ -22,15 +22,6 @@ sqlite3 *DB;
 sqlite3_stmt *statement;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -39,7 +30,7 @@ sqlite3_stmt *statement;
 	
     self.mapSource = MapSourceStandard;
     
-    [self plotCrimePositions];
+    [self plotPositions];
 }
 
 - (void)viewDidUnload
@@ -56,29 +47,7 @@ sqlite3_stmt *statement;
     // Dispose of any resources that can be recreated.
 }
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-    
-    static NSString *identifier = @"BusLocation";
-    if ([annotation isKindOfClass:[BusLocation class]]) {
-        
-        MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-        if (annotationView == nil) {
-            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-            
-            annotationView.enabled = YES;
-            annotationView.canShowCallout = YES;
-            annotationView.image=[UIImage imageNamed:@"arrest.png"];//here we use a nice image instead of the default pins
-            
-        } else {
-            annotationView.image=[UIImage imageNamed:@"arrest.png"];
-            annotationView.annotation = annotation;
-        }
-        
-        return annotationView;
-    }
-    
-    return nil;
-}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -98,7 +67,7 @@ sqlite3_stmt *statement;
     [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     
     // 1ΩΩ
-    CLLocationCoordinate2D zoomLocation;
+    /*CLLocationCoordinate2D zoomLocation;
     zoomLocation.latitude = 20.999913;
     zoomLocation.longitude= 105.84535;
     
@@ -112,7 +81,7 @@ sqlite3_stmt *statement;
 	[_mapView setRegion:adjustedRegion animated:YES];
     
     // 4
-    [_mapView setRegion:adjustedRegion animated:YES];
+    [_mapView setRegion:adjustedRegion animated:YES];*/
     
 }
 
@@ -137,9 +106,11 @@ sqlite3_stmt *statement;
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-- (void)plotCrimePositions{
+- (void)plotPositions
+{
     
-    for (id<MKAnnotation> annotation in _mapView.annotations) {
+    for (id<MKAnnotation> annotation in _mapView.annotations)
+    {
         [_mapView removeAnnotation:annotation];
     }
     
@@ -153,7 +124,7 @@ sqlite3_stmt *statement;
         const char *sqlStatement = [firstName UTF8String];
         
         if (sqlite3_prepare_v2(DB, sqlStatement, -1, &statement, NULL) == SQLITE_OK){
-         
+            NSInteger index = 0;
             while (sqlite3_step(statement) == SQLITE_ROW){
                 NSNumber * latitude = [NSNumber numberWithDouble:sqlite3_column_double(statement, 1)];
                 NSNumber * longitude = [NSNumber numberWithDouble:sqlite3_column_double(statement, 2)];
@@ -165,9 +136,15 @@ sqlite3_stmt *statement;
                 coordinate.latitude = latitude.doubleValue;
                 coordinate.longitude = longitude.doubleValue;
                 
+                if (index == 5) {
+                    //[_mapView setCenterCoordinate:coordinate animated:NO];
+                    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coordinate, 1500, 1500);
+                    [_mapView setRegion:viewRegion animated:YES];
+                }
                 
                 BusLocation *annotation = [[BusLocation alloc] initWithName:crimeDescription address:address coordinate:coordinate] ;
                 [_mapView addAnnotation:annotation];
+                index++;
             }
         }
     }
@@ -176,8 +153,33 @@ sqlite3_stmt *statement;
     
 }
 
--(IBAction)cancel:(id)sender{
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+-(IBAction)cancel:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    
+    static NSString *identifier = @"BusLocation";
+    if ([annotation isKindOfClass:[BusLocation class]]) {
+        
+        MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (annotationView == nil) {
+            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            
+            annotationView.enabled = YES;
+            annotationView.canShowCallout = YES;
+            annotationView.image=[UIImage imageNamed:@"arrest.png"];//here we use a nice image instead of the default pins
+            
+        } else {
+            annotationView.image=[UIImage imageNamed:@"arrest.png"];
+            annotationView.annotation = annotation;
+        }
+        
+        return annotationView;
+    }
+    
+    return nil;
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay

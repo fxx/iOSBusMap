@@ -16,12 +16,9 @@
 @interface MapBusViewController : UIViewController<MKMapViewDelegate, CLLocationManagerDelegate>
 {
     CLLocationManager *locationManager;
-    
-    CLLocationCoordinate2D currentCentre;
-    int currenDist;
-    BOOL firstLaunch;
 }
 
+@property (weak, nonatomic) IBOutlet MKMapView *_mapView;
 @property (assign, nonatomic) MKMapType mapType;
 @property (assign, nonatomic) MapSource mapSource;
 
@@ -30,9 +27,5 @@
 @property (assign, nonatomic) NSString *idMapBus;
 
 -(IBAction)cancel:(id)sender;
-
-@property (weak, nonatomic) IBOutlet MKMapView *_mapView;
-
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation;
 
 @end
