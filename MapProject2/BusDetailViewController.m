@@ -28,7 +28,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.navigationItem.title   = self.busO.sName;
+    //self.navigationItem.title   = self.busO.sName;
+    
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    title.font = [UIFont boldSystemFontOfSize:14.2];
+    title.backgroundColor = [UIColor clearColor];
+    title.textColor = [UIColor whiteColor];
+    title.text = self.busO.sName;
+    self.navigationItem.titleView   = title ;
     
     // Khoi tao cac doi tuong co dinh
     // NHAN
